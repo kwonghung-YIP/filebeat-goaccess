@@ -1,3 +1,6 @@
-FROM docker.elastic.co/beats/filebeat:7.3.0
+FROM ubuntu:18.04
 
-RUN apt-get install goaccess -y
+RUN wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -; \
+    sudo apt-get install apt-transport-https; \
+    echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list; \
+    sudo apt-get update && sudo apt-get install filebeat goaccess
